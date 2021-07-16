@@ -130,8 +130,11 @@
 	/* 演習1 ここから */
 	// TODO: このコメントアウトを削除して書く
 	/* 演習1 ここまで */
+	function add_() {
+		eqlNum.value = parseFloat(midNum[0].value) + parseFloat(midNum[1].value);
+	}
 	function sub() {
-		eqlNum.value = parseFloat(midNum[0].value) - parseFloat(midNum[1].value)
+		eqlNum.value = parseFloat(midNum[0].value) - parseFloat(midNum[1].value);
 	}
 
 	/* TODO: 演習2 以降は下記に自由に記入 */
