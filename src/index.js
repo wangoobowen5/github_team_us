@@ -1,4 +1,4 @@
-(function(){
+(function () {
 	var cont = "";
 	var midNumKey = 0;
 	var mid1NumFlag = false;
@@ -11,7 +11,7 @@
 	var elems;
 	var ari;
 
-	window.onload = function init(){
+	window.onload = function init() {
 		midNum[0] = document.getElementById("mid1num");
 		midNum[1] = document.getElementById("mid2num");
 		ope = document.getElementById("ope");
@@ -20,38 +20,38 @@
 		ari = document.getElementsByClassName("symbol");
 
 		// 数字キーのイベントハンドラ
-		for(var i = 0;i < elems.length;i++){
-			elems[i].addEventListener("click",function(e){
+		for (var i = 0; i < elems.length; i++) {
+			elems[i].addEventListener("click", function (e) {
 				pushNumber(e.target.dataset.number);
-			},false);
+			}, false);
 		}
 
 		// 四則演算キーのイベントハンドラ
-		for(var i = 0;i < ari.length;i++){
-			ari[i].addEventListener("click",function(e){
+		for (var i = 0; i < ari.length; i++) {
+			ari[i].addEventListener("click", function (e) {
 				pushSymbol(e.target.dataset.number);
-			},false);
+			}, false);
 		}
 
 		// ＝のイベントハンドラ
-		document.getElementById("eqlbtn").addEventListener("click",equal,false);
+		document.getElementById("eqlbtn").addEventListener("click", equal, false);
 
 		// ac のイベントハンドラ
-		document.getElementById("clr").addEventListener("click",allClear,false);
+		document.getElementById("clr").addEventListener("click", allClear, false);
 	}
 
 	// 数字キーが押された際の処理
-	function pushNumber(new_num){
+	function pushNumber(new_num) {
 
-		if( eqlFlag || eqlNum.value == "ERROR" || midNum[0].value == "NaN" ){
+		if (eqlFlag || eqlNum.value == "ERROR" || midNum[0].value == "NaN") {
 			allClear();
 		}
 
-		if(new_num != "." && midNum[midNumKey].value == "0"){
+		if (new_num != "." && midNum[midNumKey].value == "0") {
 			midNum[midNumKey].value = new_num;
-		}else if(midNum[midNumKey] == ""){
+		} else if (midNum[midNumKey] == "") {
 			midNum[midNumKey].value = "0.";
-		}else{
+		} else {
 			midNum[midNumKey].value += new_num;
 		}
 
@@ -59,28 +59,28 @@
 	}
 
 	// 演算子が押された際の処理
-	function pushSymbol(new_cont){
+	function pushSymbol(new_cont) {
 
-		if(midNumKey == 0){
+		if (midNumKey == 0) {
 			midNumKey = 1;
-		}else if( midNum[0].value == "NaN" || eqlNum.value == "ERROR"){
+		} else if (midNum[0].value == "NaN" || eqlNum.value == "ERROR") {
 			allClear();
-		}else if( mid1NumFlag || eqlFlag ){
+		} else if (mid1NumFlag || eqlFlag) {
 			equal();
 			console.log(parseFloat(eqlNum.value));
 			var num = parseFloat(eqlNum.value);
 			allClear();
 			pushNumber(num);
-			midNumKey = 1;		
+			midNumKey = 1;
 		}
 
 		cont = new_cont;
 
-		if(midNum[1].value == ""){
+		if (midNum[1].value == "") {
 			midNum[1].value = "0";
 		}
 
-		switch(cont){
+		switch (cont) {
 			case "add":
 				ope.textContent = ("+");
 				break;
@@ -102,7 +102,7 @@
 	function equal() {
 
 		//四則演算ごとの関数を呼び出す
-		switch(cont){
+		switch (cont) {
 			case "add":
 				// add関数で足し算の処理
 				add();
@@ -124,19 +124,22 @@
 		eqlFlag = true;
 
 	}
-	
+
 	/* 演習の編集範囲 はじめ */
 
 	/* 演習1 ここから */
 	// TODO: このコメントアウトを削除して書く
 	/* 演習1 ここまで */
+	function sub() {
+		eqlNum.value = parseFloat(midNum[0].value) - parseFloat(midNum[1].value)
+	}
 
 	/* TODO: 演習2 以降は下記に自由に記入 */
 
 	/* 演習の編集範囲 おわり */
 
 	// ac を押したときの処理
-	function allClear(){
+	function allClear() {
 		midNum[0].value = "0";
 		ope.textContent = " ";
 		midNum[1].value = "";
